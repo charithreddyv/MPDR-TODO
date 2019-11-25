@@ -1,0 +1,4 @@
+frontended/node_modules/
+apiv1/migrations/__pycache__/
+apiv1/__pycache__/*
+
