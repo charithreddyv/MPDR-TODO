@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Button, Row, Modal, Form} from 'react-bootstrap';
+import Switch from "react-switch";
 import axios from 'axios';
 
 const TodoItem = (props) => {
@@ -16,9 +17,13 @@ const TodoItem = (props) => {
      console.log(err)
    })
   }
+
+  const handleComplete = (check) => {
+    setTodoItem({...todoItem, completed: check})
+  }
   return (
     <div>
-    <Card bg="white" text='grey' border="primary"  style={{width: '28rem', paddingLeft: '10px'}}>
+    <Card bg={props.data.completed ? "dark" : "white"} text={props.data.completed ? "white" : "dark"} border="primary"  style={{width: '28rem', paddingLeft: '10px'}}>
       <Card.Body>
         <Card.Title>
           {props.data.title}
@@ -27,11 +32,11 @@ const TodoItem = (props) => {
       </Card.Body>
       <Card.Footer>
         <Row>
-          <Button variant="outline-primary" size="sm" style={{marginRight: "10px"}} onClick={() => {
+          <Button variant="outline-primary" size="sm" style={{marginRight: "10px"}} disabled={props.data.completed} onClick={() => {
             setTodoItem({title: props.data.title, description: props.data.description, completed: props.data.completed})
             setShowEdit(true)
           }}>Edit</Button>
-          <Button variant="outline-danger"  size="sm" onClick={() => props.deleteitem(props.data.id)} style={{marginLeft: 'auto'}}> Delete</Button>
+          <Button variant="outline-danger"  size="sm" disabled={!props.data.completed} onClick={() => props.deleteitem(props.data.id)} style={{marginLeft: 'auto'}}> Delete</Button>
         </Row>
       </Card.Footer>
     </Card>
@@ -48,6 +53,11 @@ const TodoItem = (props) => {
           <Form.Group>
             <Form.Label>Description: </Form.Label>
             <Form.Control type="text" placeholder="Description"  value={todoItem.description || ''} onChange={(e)=> setTodoItem({...todoItem, description: e.target.value }) }/>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Mark Complete:</Form.Label>
+            <br />
+            <Switch onChange={handleComplete} checked={props.data.completed}/>
           </Form.Group>
         </Form>
       </Modal.Body>
