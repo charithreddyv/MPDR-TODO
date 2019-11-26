@@ -17,7 +17,7 @@ class TodoListView(APIView):
         serialize  = TodoSerializer(data=todo)
         if serialize.is_valid(raise_exception=True):
             todo_saved = serialize.save()
-        return Response({"Success": todo_saved.title})
+        return Response(serialize.data)
 
 class TodosView(APIView):
     def put(self, request, pk):

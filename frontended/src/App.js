@@ -31,7 +31,9 @@ function App() {
   const createTodoItem = () => {
     axios.post('todos/', {"todo": todoItem})
     .then(res => {
+      settodo([...todolist, res.data])
       setItemShow(false)
+      setTodoItem({title: '', description: '', completed: ''})
     })
     .catch(err => setItemShow(false))
   }
