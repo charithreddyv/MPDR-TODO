@@ -2,6 +2,10 @@
 
 A simple Stack Inspired from **MEAN** and **MERN** stack
 
+### Prerequisites :dizzy:
+1. Install Mongo and create a db named "todos"
+2. in frontended/package.json configure the proxy address with API's IP
+
 ### Setup :fire:
 1. ``` git clone https://github.com/charithreddyv/MPDR-TODO.git ```
 2. ``` cd MPDR-TODO ```
